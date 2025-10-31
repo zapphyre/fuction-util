@@ -60,9 +60,9 @@ public class FunHelper {
     }
 
     @SafeVarargs
-    public static <T> Consumer<T> logFun(String msg, T ...args) {
+    public static <T> Consumer<T> logFun(String msg, Object ...args) {
         return q -> {
-            T[] combined = (T[]) new Object[args.length + 1];
+            Object[] combined = new Object[args.length + 1];
             combined[0] = q;
             System.arraycopy(args, 0, combined, 1, args.length);
 

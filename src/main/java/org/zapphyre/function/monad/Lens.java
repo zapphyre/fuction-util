@@ -13,7 +13,7 @@ public class Lens<T> {
         return new Lens<>(instance);
     }
 
-    public <R> Lens<R> l(Function<? super T, ? extends R> focus) {
+    public <R> Lens<R> f(Function<? super T, ? extends R> focus) {
         return new Lens<>(focus.apply(instance));
     }
 

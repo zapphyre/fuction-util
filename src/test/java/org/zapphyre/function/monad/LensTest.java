@@ -13,8 +13,8 @@ public class LensTest {
         Car car = new Car(new Engine(new Part("part")));
 
         String result = l(car)
-                .l(Car::getEngine)
-                .l(Engine::getPart)
+                .f(Car::getEngine)
+                .f(Engine::getPart)
                 .r(Part::getName);
 
         Assertions.assertEquals("part", result);

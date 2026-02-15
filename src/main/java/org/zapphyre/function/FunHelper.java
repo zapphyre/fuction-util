@@ -3,13 +3,13 @@ package org.zapphyre.function;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 @Slf4j
 @UtilityClass
@@ -69,6 +69,13 @@ public class FunHelper {
             log.info(msg, combined);
         };
     }
+
+    @SafeVarargs
+    public static <T, C extends Collection<T>> C concat(C initial, C... additionals) {
+        Arrays.stream(additionals).forEach(initial::addAll);
+        return initial;
+    }
+
 
     public static <T> T throwUp() {
         throw new RuntimeException();

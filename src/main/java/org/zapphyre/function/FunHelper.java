@@ -73,6 +73,7 @@ public class FunHelper {
 
     @SafeVarargs
     public static <T, C extends Collection<T>> C concat(C instance, C initial, C... additionals) {
+        instance.addAll(initial);
         Arrays.stream(additionals).forEach(instance::addAll);
         return instance;
     }

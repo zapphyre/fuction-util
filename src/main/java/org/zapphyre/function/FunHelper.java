@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -71,11 +72,20 @@ public class FunHelper {
     }
 
     @SafeVarargs
-    public static <T, C extends Collection<T>> C concat(C initial, C... additionals) {
-        Arrays.stream(additionals).forEach(initial::addAll);
-        return initial;
+    public static <T, C extends Collection<T>> C concat(C instance, C initial, C... additionals) {
+        Arrays.stream(additionals).forEach(instance::addAll);
+        return instance;
     }
 
+    @SafeVarargs
+    public static <T> List<T> concatToList(List<T> initial, List<T>... additionals) {
+        return concat(new ArrayList<>(), initial, additionals).stream().toList();
+    }
+
+    @SafeVarargs
+    public static <T> Set<T> concatToSet(Set<T> initial, Set<T>... additionals) {
+        return new HashSet<>(concat(new HashSet<>(), initial, additionals));
+    }
 
     public static <T> T throwUp() {
         throw new RuntimeException();
